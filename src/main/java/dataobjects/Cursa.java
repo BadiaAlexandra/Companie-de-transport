@@ -3,9 +3,10 @@ package dataobjects;
 public class Cursa {
 private Ruta ruta;
 private Integer cod;
-private Integer timpPlecare;
-private Integer timpSosire;
+private String timpPlecare;
+private String timpSosire;
 private Program program;
+
 public Ruta getRuta() {
 	return ruta;
 }
@@ -18,16 +19,16 @@ public Integer getCod() {
 public void setCod(Integer cod) {
 	this.cod = cod;
 }
-public Integer getTimpPlecare() {
+public String getTimpPlecare() {
 	return timpPlecare;
 }
-public void setTimpPlecare(Integer timpPlecare) {
+public void setTimpPlecare(String timpPlecare) {
 	this.timpPlecare = timpPlecare;
 }
-public Integer getTimpSosire() {
+public String getTimpSosire() {
 	return timpSosire;
 }
-public void setTimpSosire(Integer timpSosire) {
+public void setTimpSosire(String timpSosire) {
 	this.timpSosire = timpSosire;
 }
 public Program getProgram() {
@@ -41,13 +42,17 @@ public String toString() {
 	return "Cursa [ruta=" + ruta + ", cod=" + cod + ", timpPlecare=" + timpPlecare + ", timpSosire=" + timpSosire
 			+ ", program=" + program + "]";
 }
-public Cursa(Ruta ruta, Integer cod, Integer timpPlecare, Integer timpSosire, Program program) {
+public Cursa(Ruta ruta, Integer cod, String timpPlecare, String timpSosire, Program program) {
 	super();
 	this.ruta = ruta;
 	this.cod = cod;
 	this.timpPlecare = timpPlecare;
 	this.timpSosire = timpSosire;
 	this.program = program;
+}
+
+public Cursa()
+{
 }
 
 }

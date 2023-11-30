@@ -1,5 +1,8 @@
 package dataobjects;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Categoria {
  private String nume;
  private String idLegitimatie;

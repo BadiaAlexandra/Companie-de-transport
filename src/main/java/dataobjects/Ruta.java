@@ -5,6 +5,7 @@ import java.util.List;
 public class Ruta {
  private Integer id;
  private List<Statie> traseu;
+ 
 public Integer getId() {
 	return id;
 }
