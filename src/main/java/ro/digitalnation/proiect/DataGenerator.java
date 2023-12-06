@@ -1,11 +1,16 @@
 package ro.digitalnation.proiect;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import dataobjects.Calator;
+import dataobjects.Categoria;
 import dataobjects.Cursa;
 import dataobjects.MersMicrobuze;
 import dataobjects.Program;
+import dataobjects.Reduceri;
 import dataobjects.Ruta;
 import dataobjects.Statie;
 
@@ -150,5 +155,22 @@ public class DataGenerator {
 		MersMicrobuze mers = new MersMicrobuze(curse);
 		return mers;
 	}
-
+	
+	public List<Calator> GetDateCalatori()
+	{
+		List<Calator> calatori = new ArrayList<Calator>();
+		
+		Calator calator1 = new Calator("xx", "a@yahoo.com", "abcd", "Alin", "Ioan");
+		calatori.add(calator1);
+		
+		return calatori;
+	}
+	
+	public Reduceri GetReduceri()
+	{
+		LinkedHashMap<String, Integer> reduceri = new LinkedHashMap<String, Integer>();		
+		reduceri.put("Student", 90);
+		
+		return new Reduceri(reduceri);
+	}
 }

@@ -1,5 +1,8 @@
 package dataobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Calator {
  private String cnp;
  private String email;
@@ -7,6 +10,8 @@ public class Calator {
  private String nume;
  private String prenume;
  private Categoria categoria;
+ private List<Abonament> abonamente;
+ 
 public String getCnp() {
 	return cnp;
 }
@@ -48,13 +53,26 @@ public Categoria getCategoria() {
 public void setCategoria(Categoria categoria) {
 	this.categoria = categoria;
 }
-public Calator(String cnp, String email, String parola, String nume, String prenume, Categoria categoria) {
+
+public List<Abonament> getAbonamente() {
+	return abonamente;
+}
+public void setAbonamente(List<Abonament> abonamente) {
+	this.abonamente = abonamente;
+}
+public void AddAbonament(Abonament abonament)
+{
+	this.abonamente.add(abonament);
+}
+
+public Calator(String cnp, String email, String parola, String nume, String prenume) {
 	super();
 	this.cnp = cnp;
 	this.email = email;
 	this.parola = parola;
 	this.nume = nume;
 	this.prenume = prenume;
-	this.categoria = categoria;
+	this.categoria = null;
+	this.abonamente = new ArrayList<Abonament>();
 }
 }

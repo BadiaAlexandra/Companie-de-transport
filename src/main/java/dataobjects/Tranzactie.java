@@ -5,6 +5,7 @@ private String calator;
 private String cursa;
 private Integer pret;
 private String dataTimpVanzare;
+
 public String getCalator() {
 	return calator;
 }

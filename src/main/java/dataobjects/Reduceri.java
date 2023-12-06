@@ -3,13 +3,13 @@ package dataobjects;
 import java.util.Map;
 
 public class Reduceri {
-	Map<Categoria, Integer> reduceri;
+	Map<String, Integer> reduceri;
 
-	public Map<Categoria, Integer> getReduceri() {
+	public Map<String, Integer> getReduceri() {
 		return reduceri;
 	}
 
-	public void setReduceri(Map<Categoria, Integer> reduceri) {
+	public void setReduceri(Map<String, Integer> reduceri) {
 		this.reduceri = reduceri;
 	}
 
@@ -18,10 +18,8 @@ public class Reduceri {
 		return "Reduceri [reduceri=" + reduceri + "]";
 	}
 
-	public Reduceri(Map<Categoria, Integer> reduceri) {
+	public Reduceri(Map<String, Integer> reduceri) {
 		super();
 		this.reduceri = reduceri;
-	}
-	
-	
+	}	
 }
