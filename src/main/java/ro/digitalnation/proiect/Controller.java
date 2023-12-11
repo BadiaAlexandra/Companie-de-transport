@@ -8,10 +8,13 @@ import dataobjects.Categoria;
 import dataobjects.Cursa;
 import dataobjects.DateCategorie;
 import dataobjects.EmitereAbonament;
+import dataobjects.EmitereBilet;
 import dataobjects.MersMicrobuze;
 import dataobjects.Reduceri;
 import dataobjects.Statie;
+import dataobjects.Tranzactie;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class Controller {
 	MersMicrobuze mers;
 	List<Calator> calatori;
 	Reduceri reduceri;
+	List<Tranzactie> tranzactii;
 	
 	Controller()
 	{
@@ -36,6 +40,7 @@ public class Controller {
 		mers = generator.GetMersMicrobuze();
 		calatori = generator.GetDateCalatori();
 		reduceri = generator.GetReduceri();
+		tranzactii = generator.GetTranzactii();
 	}
 
 	@GetMapping("/getCurse")
@@ -155,7 +160,7 @@ public class Controller {
 	    }
 	    
 		// calculam pretul (poate bazat pe categorie)
-	    int pret = calculeazaPret(calatorActual, calator.getValabilitate());
+	    int pret = calculeazaPretAbonament(calatorActual, calator.getValabilitate());
 	    Abonament abonament = new Abonament(
 	    		calator.getPlecare(),
 	    		calator.getSosire(),
@@ -172,8 +177,8 @@ public class Controller {
 	    return (valabilitate > 7)&&(valabilitate < 31);
 	}
 	
-	private int calculeazaPret(Calator calator, Integer valabilitate) {
-	    int pret = (int) (3.5 * valabilitate);
+	private int calculeazaPretAbonament(Calator calator, Integer valabilitate) {
+	    int pret = (int) (8 * valabilitate);
 		
 		if (calator != null && calator.getCategoria() != null) {
 	    	Categoria categoriaCalator = calator.getCategoria();
@@ -200,5 +205,69 @@ public class Controller {
 	    Categoria categoria = new Categoria(categorie.getNumeCategorie(), categorie.getIdLegitimatie());
 	    calatorActual.setCategoria(categoria);
 	    return ResponseEntity.ok(HttpStatus.OK);
+	}
+	
+	@GetMapping("/getTranzactii")
+	 public List<Tranzactie> tranzactii() {
+        return tranzactii;
+    }
+	
+	@GetMapping("/getTranzactiiUtilizator")
+	public List<Tranzactie> tranzactiiUtilizator(@RequestParam(value = "email") String email
+			, @RequestParam(value = "parola") String parola) {
+		
+		List<Tranzactie> tranzactiiUtilizator = new ArrayList<Tranzactie>();
+		
+		Calator calatorActual = verificaUtilizator(email, parola);
+	    if (calatorActual == null) {
+	        return null;
+	    }
+	    
+	    for(Tranzactie tranzactieCurenta : tranzactii)
+	    {
+	    	if(tranzactieCurenta.getCalator().equalsIgnoreCase(calatorActual.getCnp()))
+	    	{
+	    		tranzactiiUtilizator.add(tranzactieCurenta);
+	    	}
+	    }
+		
+		return tranzactiiUtilizator;
+	}
+	
+	//emitereBilet
+	//email, parola, idCursa, 
+	@PostMapping("/emitereBilet")
+	public ResponseEntity cumparaBilet(@RequestBody EmitereBilet bilet) {
+
+	    Calator calatorActual = verificaUtilizator(bilet.getEmail(), bilet.getParola());
+	    if (calatorActual == null) {
+	        return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+	    }
+
+	    int pret = calculeazaPretBilet(calatorActual);
+	    String timeStamp = new SimpleDateFormat("dd.MM.YYYY-HH:mm:ss").format(new java.util.Date());
+
+	    Tranzactie tranzactie = new Tranzactie(calatorActual.getCnp(), bilet.getIdCursa()
+	    		, pret, timeStamp);
+	    tranzactii.add(tranzactie);
+
+	    return ResponseEntity.ok(HttpStatus.OK);
+	}
+	
+	private int calculeazaPretBilet(Calator calator) {
+	    int pret = 8;
+		
+		if (calator != null && calator.getCategoria() != null) {
+	    	Categoria categoriaCalator = calator.getCategoria();
+	       	String numeCategoria = categoriaCalator.getNume();
+	       	
+	       	Integer reducere = reduceri.getReduceri().get(numeCategoria);
+	       	if (reducere != null)
+	       	{
+	       		pret = pret - (int)( (float)reducere / 100.0 * pret);
+	       	}
+	    }
+		
+		return pret;
 	}
 }

@@ -2,7 +2,7 @@ package dataobjects;
 
 public class Tranzactie {
 private String calator;
-private String cursa;
+private Integer codCursa;
 private Integer pret;
 private String dataTimpVanzare;
 
@@ -12,11 +12,11 @@ public String getCalator() {
 public void setCalator(String calator) {
 	this.calator = calator;
 }
-public String getCursa() {
-	return cursa;
+public Integer getCursa() {
+	return codCursa;
 }
-public void setCursa(String cursa) {
-	this.cursa = cursa;
+public void setCursa(Integer cursa) {
+	this.codCursa = cursa;
 }
 public Integer getPret() {
 	return pret;
@@ -32,13 +32,13 @@ public void setDataTimpVanzare(String dataTimpVanzare) {
 }
 @Override
 public String toString() {
-	return "Tranzactie [calator=" + calator + ", cursa=" + cursa + ", pret=" + pret + ", dataTimpVanzare="
+	return "Tranzactie [calator=" + calator + ", cursa=" + codCursa + ", pret=" + pret + ", dataTimpVanzare="
 			+ dataTimpVanzare + "]";
 }
-public Tranzactie(String calator, String cursa, Integer pret, String dataTimpVanzare) {
+public Tranzactie(String calator, Integer cursa, Integer pret, String dataTimpVanzare) {
 	super();
 	this.calator = calator;
-	this.cursa = cursa;
+	this.codCursa = cursa;
 	this.pret = pret;
 	this.dataTimpVanzare = dataTimpVanzare;
 }

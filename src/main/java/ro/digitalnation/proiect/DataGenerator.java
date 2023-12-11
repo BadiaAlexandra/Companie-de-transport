@@ -13,6 +13,7 @@ import dataobjects.Program;
 import dataobjects.Reduceri;
 import dataobjects.Ruta;
 import dataobjects.Statie;
+import dataobjects.Tranzactie;
 
 // "mock" to generate some data - replace for a real SQL database
 public class DataGenerator {
@@ -160,8 +161,24 @@ public class DataGenerator {
 	{
 		List<Calator> calatori = new ArrayList<Calator>();
 		
-		Calator calator1 = new Calator("xx", "a@yahoo.com", "abcd", "Alin", "Ioan");
+		Calator calator1 = new Calator("6011016460035", "alexandra@yahoo.com", "Ale123", "Alexandra", "Ioana");
 		calatori.add(calator1);
+		
+		Calator calator2 = new Calator("6151210097561", "alin@yahoo.com", "Alin123", "Alin", "Mihai");
+		calatori.add(calator2);
+		
+		Calator calator3 = new Calator("6151224049258", "mihai@yahoo.com", "Mihai123", "Mihai", "Mihnea");
+		calatori.add(calator3);
+		
+		Calator calator4 = new Calator("6121219448161", "sorina@yahoo.com", "Sorina123", "Sorina", "Miruna");
+		calatori.add(calator4);
+		
+		Calator calator5 = new Calator("6090212089577", "Elena@yahoo.com", "Elena123", "Elena", "Emilia");
+		calatori.add(calator5);
+		
+		Calator calator6 = new Calator("2730320457969", "Silviu@yahoo.com", "Silviu123", "Silviu", "Sorin");
+		calatori.add(calator6);
+		
 		
 		return calatori;
 	}
@@ -170,7 +187,26 @@ public class DataGenerator {
 	{
 		LinkedHashMap<String, Integer> reduceri = new LinkedHashMap<String, Integer>();		
 		reduceri.put("Student", 90);
+		reduceri.put("Elev", 95);
+		reduceri.put("Pensionar", 50);
+		reduceri.put("Orfan", 75);
+		reduceri.put("Copil", 40);
 		
 		return new Reduceri(reduceri);
+	}
+	
+	public List<Tranzactie> GetTranzactii()
+	{
+		List<Tranzactie> tranzactii = new ArrayList<Tranzactie>();
+		
+		Tranzactie t1 = new Tranzactie("6151210097561", 108, 8, "11.12.2023-02:04:55");
+		Tranzactie t2 = new Tranzactie("6151210097561", 105, 4, "01.11.2023-22:25:14");
+		Tranzactie t3 = new Tranzactie("2730320457969", 102, 2, "07.09.2021-19:04:55");
+		
+		tranzactii.add(t1);
+		tranzactii.add(t2);
+		tranzactii.add(t3);
+		
+		return tranzactii;
 	}
 }
